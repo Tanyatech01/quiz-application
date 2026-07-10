@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ quiz.quiz_name }}</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>{{ quiz.quiz_name }}</h1>
+        <p>{{ quiz.about }}</p>
+        <p><strong>Time Limit:</strong> {{ quiz.time_limit }} minutes</p>
+        <hr style="border: 1px solid #eaeaea; margin-bottom: 30px;">
+
+        <form action="" method="POST">
+            {% csrf_token %} 
+            
+            {% for question in quiz.question_set.all %}
+                <div class="question-block">
+                    <h3>{{ question.question_text }}</h3>
+                    
+                    {% for answer in question.answer_set.all %}
+                        <div>
+                            <input type="radio" name="question_{{ question.id }}" value="{{ answer.id }}" id="ans_{{ answer.id }}" required>
+                            <label for="ans_{{ answer.id }}">{{ answer.answer_text }}</label>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <button type="submit">Submit Quiz</button>
+        </form>
+    </div>
+</body>
+</html>

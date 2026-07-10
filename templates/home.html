@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz Application</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div style="width: 100%; max-width: 600px; display: flex; justify-content: space-between; margin-bottom: 20px;">
+        {% if user.is_authenticated %}
+            <p>Welcome, <strong>{{ user.username }}</strong>!</p>
+            <form action="/logout/" method="POST" style="padding: 0; box-shadow: none; border: none; background: none;">
+                {% csrf_token %}
+                <button type="submit" style="background-color: #6b705c;">Logout</button>
+            </form>
+        {% else %}
+            <p>Welcome to EduQuiz!</p>
+            <div>
+                <a href="/login/" style="margin-right: 15px;">Login</a>
+                <a href="/register/">Register</a>
+            </div>
+        {% endif %}
+    </div>
+    <h1>Available Quizzes</h1>
+    <ul>
+        {% for quiz in all_quizzes %}
+            <li>
+                <a href="/quiz/{{ quiz.id }}/">{{ quiz.quiz_name }}</a> 
+                <span>⏱️ {{ quiz.time_limit }} minutes</span>
+            </li>
+        {% endfor %}
+    </ul>
+    {% if user.is_authenticated %}
+        <h1 style="margin-top: 40px;">Your Past Scores</h1>
+        {% if user_results %}
+            <ul>
+                {% for result in user_results %}
+                    <li>
+                        <strong>{{ result.quiz.quiz_name }}</strong> 
+                        <br>
+                        Score: {{ result.score }} / {{ result.total_questions }}
+                        <br>
+                        <small style="color: #888;">Taken on: {{ result.date_taken|date:"M d, Y" }}</small>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>You haven't taken any quizzes yet!</p>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
