@@ -72,18 +72,18 @@ li:hover {
     transform: translateY(-2px);
 }
 
-/* --- Form Specific Clean-up --- */
-form {
+/* --- Auth Form Specific Clean-up (Register & Login Only) --- */
+.auth-form {
     background-color: transparent;
     width: 100%;
     max-width: 500px;
 }
 
-form p {
+.auth-form p {
     margin-bottom: 20px;
 }
 
-form label {
+.auth-form label {
     display: block;
     font-weight: bold;
     margin-bottom: 6px;
@@ -91,8 +91,8 @@ form label {
 }
 
 /* Style the input boxes */
-form input[type="text"],
-form input[type="password"] {
+.auth-form input[type="text"],
+.auth-form input[type="password"] {
     width: 100%;
     padding: 10px 12px;
     border: 1px solid #dcd8cf;
@@ -104,14 +104,14 @@ form input[type="password"] {
     transition: border-color 0.2s ease;
 }
 
-form input[type="text"]:focus,
-form input[type="password"]:focus {
+.auth-form input[type="text"]:focus,
+.auth-form input[type="password"]:focus {
     outline: none;
     border-color: #a5a58d;
 }
 
 /* Fix the floating password requirement lists */
-form ul {
+.auth-form ul {
     list-style-type: disc; 
     padding-left: 20px;
     margin-top: 5px;
@@ -119,7 +119,7 @@ form ul {
     width: auto;
 }
 
-form li {
+.auth-form li {
     background: transparent;
     padding: 0;
     margin-bottom: 4px;
@@ -130,7 +130,7 @@ form li {
     justify-content: flex-start;
 }
 
-form li:hover {
+.auth-form li:hover {
     transform: none; 
 }
 
