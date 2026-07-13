@@ -72,6 +72,42 @@ li:hover {
     transform: translateY(-2px);
 }
 
+/* --- Quiz Page Layout --- */
+.quiz-container {
+    width: 100%;
+    max-width: 600px;
+}
+
+.question-block {
+    margin-bottom: 35px;
+    margin-top: 10px;
+}
+
+/* Adds the line above and below the question text */
+.question-block h3 {
+    border-top: 1px solid #dcd8cf;
+    border-bottom: 1px solid #dcd8cf;
+    padding: 15px 0;
+    margin-bottom: 20px;
+    font-size: 1.15rem;
+}
+
+.answer-row {
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center; /* Vertically aligns the radio button and text */
+}
+
+.answer-row input[type="radio"] {
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.answer-row label {
+    cursor: pointer;
+    color: #2c3e50;
+}
+
 /* --- Auth Form Specific Clean-up (Register & Login Only) --- */
 .auth-form {
     background-color: transparent;
@@ -141,4 +177,97 @@ li:hover {
     color: #8a867d;
     margin-top: 6px;
     font-style: italic;
+}
+
+/* --- Live Timer Styling --- */
+.timer-box {
+    background-color: #ffffff;
+    border: 2px solid #dcd8cf;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #d06d1f;
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+#time-display {
+    font-family: monospace;
+    font-size: 1.5rem;
+    margin-left: 10px;
+}
+
+/* --- Impressive Homepage Grid (Pinterest Style) --- */
+.dashboard-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.dashboard-header h1 {
+    font-size: 2.5rem;
+    border: none;
+    margin-bottom: 10px;
+}
+
+.dashboard-header p {
+    color: #8a867d;
+    font-style: italic;
+}
+
+/* This replaces your old <ul> styling for the homepage */
+.quiz-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0;
+    list-style-type: none;
+}
+
+/* Enhancing the Polaroid Card Look */
+.quiz-grid li {
+    background-color: #ffffff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    border: 1px solid #eaeaea;
+}
+
+.quiz-grid li strong {
+    font-size: 1.25rem;
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.quiz-grid li span {
+    font-size: 0.9rem;
+    color: #8a867d;
+    margin-bottom: 15px;
+}
+
+/* Make the button stretch across the card */
+.quiz-grid li a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background-color: #d06d1f;
+    color: white;
+    padding: 10px 0;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: normal;
+    transition: background-color 0.2s;
+    box-sizing: border-box;
+}
+
+.quiz-grid li a:hover {
+    background-color: #b55d1a;
+    text-decoration: none;
 }

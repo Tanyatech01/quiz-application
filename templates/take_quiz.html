@@ -8,11 +8,17 @@
 <body>
     <div class="quiz-container">
         <h1>{{ quiz.quiz_name }}</h1>
-        <p>{{ quiz.about }}</p>
-        <p><strong>Time Limit:</strong> {{ quiz.time_limit }} minutes</p>
-        <hr style="border: 1px solid #eaeaea; margin-bottom: 30px;">
+        
+        {% if quiz.about %}
+            <p>{{ quiz.about }}</p>
+        {% endif %}
+        
+        <!-- Live Timer Display -->
+        <div class="timer-box">
+            Time Remaining: <span id="time-display">--:--</span>
+        </div>
 
-        <form action="" method="POST">
+        <form action="" method="POST" id="quiz-form">
             {% csrf_token %} 
             
             {% for question in quiz.question_set.all %}
@@ -20,7 +26,7 @@
                     <h3>{{ question.question_text }}</h3>
                     
                     {% for answer in question.answer_set.all %}
-                        <div>
+                        <div class="answer-row">
                             <input type="radio" name="question_{{ question.id }}" value="{{ answer.id }}" id="ans_{{ answer.id }}" required>
                             <label for="ans_{{ answer.id }}">{{ answer.answer_text }}</label>
                         </div>
@@ -31,5 +37,33 @@
             <button type="submit">Submit Quiz</button>
         </form>
     </div>
+
+    <!-- JavaScript for the Countdown -->
+    <script>
+        // Get the time limit from the database (in minutes) and convert to seconds
+        let timeInSeconds = {{ quiz.time_limit }} * 60;
+        const timeDisplay = document.getElementById('time-display');
+        const form = document.getElementById('quiz-form');
+
+        const timer = setInterval(function() {
+            let minutes = Math.floor(timeInSeconds / 60);
+            let seconds = timeInSeconds % 60;
+            
+            // Add a leading zero if seconds are single digits (e.g., 5:09)
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            
+            timeDisplay.textContent = minutes + ":" + seconds;
+            
+            if (timeInSeconds <= 0) {
+                clearInterval(timer);
+                timeDisplay.textContent = "0:00";
+                timeDisplay.style.color = "red";
+                alert("Time is up! Submitting your quiz automatically.");
+                // Automatically submit the form to the server
+                form.submit();
+            }
+            timeInSeconds--;
+        }, 1000); // 1000 milliseconds = 1 second
+    </script>
 </body>
 </html>
